@@ -4,6 +4,6 @@ public class Main {
     public static void main(String[] args) {
         HakuApp app = new HakuApp();
         app.mainMenu();
-        /*PRUEBA*/
+        /*PRUEBA A*/
     }
 }
