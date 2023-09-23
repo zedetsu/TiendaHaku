@@ -1,8 +1,31 @@
 package tiendaHaku;
-import java.util.Scanner;
+
 import java.util.ArrayList;
 import java.util.List;
 
+public class HakuApp {
+    public static void main(String[] args) {
+        // Crear productos usando ProductoBuilder
+        Producto producto1 = new ProductoBuilder()
+                .setCodigo(1)
+                .setNombre("Camisa")
+                .setColor("Rojo")
+                .setTalla("M")
+                .build();
+
+        Producto producto2 = new ProductoBuilder()
+                .setCodigo(2)
+                .setNombre("Pantalón")
+                .setColor("Azul")
+                .setTalla("L")
+                .build();
+
+        // Mostrar información de productos
+        System.out.println(producto1);
+        System.out.println(producto2);
+    }
+}
+/*
 public class HakuApp {
     private List<UserAccount> employees;
     private List<UserAccount> customers;
@@ -187,7 +210,7 @@ public class HakuApp {
         int orderId = generateUniqueOrderId();
 
         // Crear un objeto de pedido
-        //Order order = new Order(orderId, customerName, /* otros detalles del pedido */);
+        //Order order = new Order(orderId, customerName, /* otros detalles del pedido //);
 
         // Agregar el pedido a la lista de pedidos
         //orders.add(order);
@@ -372,4 +395,4 @@ public class HakuApp {
         EMPLEADO,
         CLIENTE
     }
-}
+}*/

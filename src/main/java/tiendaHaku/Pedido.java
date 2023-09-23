@@ -1,24 +1,69 @@
 package tiendaHaku;
-
-import java.util.ArrayList;
+import java.util.Date;
 
 public class Pedido {
-    Cliente cliente;
-    ArrayList<Producto> productos = new ArrayList<>();
+    private int numeroPedido;
+    private Date fecha;
+    private Producto producto;
+    private int cantidad;
+    private String estado;
 
-    void agregarProducto(Producto producto) {
-        productos.add(producto);
+    public Pedido(int numeroPedido, Date fecha, Producto producto, int cantidad, String estado) {
+        this.numeroPedido = numeroPedido;
+        this.fecha = fecha;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.estado = estado;
     }
 
-    void eliminarProducto(Producto producto) {
-        productos.remove(producto);
+    // Getters y setters para los atributos
+
+    public int getNumeroPedido() {
+        return numeroPedido;
     }
 
-    double calcularTotal() {
-        double total = 0;
-        for (Producto producto : productos) {
-            total += producto.calcularPrecio();
-        }
-        return total;
+    public void setNumeroPedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Número de Pedido: " + numeroPedido +
+                ", Fecha: " + fecha +
+                ", Producto: " + producto.getNombre() +
+                ", Cantidad: " + cantidad +
+                ", Estado: " + estado;
     }
 }
