@@ -1,17 +1,19 @@
 package tiendaHaku;
 
+import java.util.List;
+
 public class Cliente {
-    private String codigoCliente;
+    private int codigoCliente;
     private String nombre;
     private String direccion;
 
-    public Cliente(String codigoCliente, String nombre, String direccion) {
+    public Cliente(int codigoCliente, String nombre, String direccion) {
         this.codigoCliente = codigoCliente;
         this.nombre = nombre;
         this.direccion = direccion;
     }
 
-    public String getCodigoCliente() {
+    public int getCodigoCliente() {
         return codigoCliente;
     }
 
@@ -21,6 +23,15 @@ public class Cliente {
 
     public String getDireccion() {
         return direccion;
+    }
+
+    public static Cliente buscarClientePorCodigo(List<Cliente> clientes, int codigoCliente) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCodigoCliente() == codigoCliente) {
+                return cliente;
+            }
+        }
+        return null;
     }
 
     @Override
