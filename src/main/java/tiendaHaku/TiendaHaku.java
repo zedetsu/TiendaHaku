@@ -1,5 +1,6 @@
 package tiendaHaku;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,25 +20,32 @@ public class TiendaHaku {
 
     public void menuPrincipal() {
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
-            System.out.println("Bienvenido a Haku - Tienda Otaku");
-            System.out.println("1. Iniciar sesión");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
+            try {
+                System.out.println("Bienvenido a Haku - Tienda Otaku");
+                System.out.println("1. Iniciar sesión");
+                System.out.println("0. Salir");
+                System.out.print("Seleccione una opción: ");
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
+                int opcion = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    iniciarSesion(scanner);
-                    break;
-                case 0:
-                    System.out.println("¡Gracias por usar Haku! ¡Hasta pronto!");
-                    return;
-                default:
-                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                try {
+                    switch (opcion) {
+                        case 1:
+                            iniciarSesion(scanner);
+                            break;
+                        case 0:
+                            System.out.println("¡Gracias por usar Haku! ¡Hasta pronto!");
+                            return;
+                        default:
+                            throw new OpcionInvalidaException();
+                    }
+                } catch (OpcionInvalidaException e) {
+                    System.out.println(e.getMessage());
+                }
+            } catch (InputMismatchException e) {
+                InputErrorHandler.handleInputMismatch(scanner);
             }
         }
     }
