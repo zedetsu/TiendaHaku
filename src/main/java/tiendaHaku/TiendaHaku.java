@@ -227,7 +227,7 @@ public class TiendaHaku {
 
         // Solicitar información del cliente nuevo
         System.out.print("Código del cliente: ");
-        int codigoCliente = scanner.nextInt();
+        int codigoCliente = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Nombre del cliente: ");
         String nombreCliente = scanner.nextLine();
