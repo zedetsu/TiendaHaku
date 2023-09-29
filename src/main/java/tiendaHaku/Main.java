@@ -6,6 +6,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Usuario> usuarios = new ArrayList<>();
+        List<Cliente> clientes = new ArrayList<>();
         List<Producto> productos = new ArrayList<>();
         List<Pedido> pedidos = new ArrayList<>();
 
@@ -19,7 +20,7 @@ public class Main {
         Usuario usuario4 = new Usuario("Oscar Paredes","OscarP", "contrasenia");
         usuarios.add(usuario4);
 
-        HakuApp app = new HakuApp(usuarios,productos,pedidos);
+        HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
         app.menuPrincipal();
 
         //Oscar

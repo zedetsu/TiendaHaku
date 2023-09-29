@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class HakuApp {
     private List<Usuario> usuarios;
+    private List<Cliente> clientes;
     private List<Producto> productos;
     private List<Pedido> pedidos;
 
-    public HakuApp(List<Usuario> usuarios, List<Producto> productos, List<Pedido> pedidos) {
+    public HakuApp(List<Usuario> usuarios, List<Cliente> clientes, List<Producto> productos, List<Pedido> pedidos) {
         this.usuarios = usuarios;
+        this.clientes = clientes;
         this.productos = productos;
         this.pedidos = pedidos;
     }
@@ -62,7 +64,7 @@ public class HakuApp {
                 return usuario;
             }
         }
-        return null; // Si no se encuentra una coincidencia
+        return null;
     }
 
     public void menuVendedor(Scanner scanner, Usuario usuario) {
@@ -76,7 +78,7 @@ public class HakuApp {
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
