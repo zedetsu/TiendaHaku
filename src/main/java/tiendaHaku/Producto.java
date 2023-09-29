@@ -64,6 +64,14 @@ public class Producto {
         }
     }
 
+    public void reducirCantidad(int cantidadAReducir) {
+        if (cantidadAReducir >= 0 && this.cantidad >= cantidadAReducir) {
+            this.cantidad -= cantidadAReducir;
+        } else {
+            System.out.println("Error: No se puede reducir la cantidad. Cantidad actual: " + this.cantidad);
+        }
+    }
+
     public static Producto buscarProductoPorCodigo(List<Producto> productos, int codigo) {
         for (Producto producto : productos) {
             if (producto.getCodigo() == codigo) {

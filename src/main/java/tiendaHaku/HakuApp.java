@@ -1,4 +1,5 @@
 package tiendaHaku;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ public class HakuApp {
     private List<Cliente> clientes;
     private List<Producto> productos;
     private List<Pedido> pedidos;
+    private int contadorPedido = 0;
 
     public HakuApp(List<Usuario> usuarios, List<Cliente> clientes, List<Producto> productos, List<Pedido> pedidos) {
         this.usuarios = usuarios;
@@ -217,7 +219,87 @@ public class HakuApp {
     }
 
     private void crearPedidoClienteNuevo(Scanner scanner) {
-        // Lógica para crear un pedido con un cliente nuevo
+        System.out.println("Creación de Pedido para Cliente Nuevo");
+
+        // Solicitar información del cliente nuevo
+        System.out.print("Código del cliente: ");
+        String codigoCliente = scanner.nextLine();
+
+        System.out.print("Nombre del cliente: ");
+        String nombreCliente = scanner.nextLine();
+
+        System.out.print("Dirección del cliente: ");
+        String direccionCliente = scanner.nextLine();
+
+        // Crear un nuevo cliente
+        Cliente nuevoCliente = new Cliente(codigoCliente, nombreCliente, direccionCliente);
+
+        // Agregar el nuevo cliente a la lista de clientes
+        clientes.add(nuevoCliente);
+
+        // Mostrar la lista de productos disponibles
+        System.out.println("Lista de Productos Disponibles:");
+        for (Producto producto : productos) {
+            System.out.println("Código: " + producto.getCodigo());
+            System.out.println("Nombre: " + producto.getNombre());
+            System.out.println("Color: " + producto.getColor());
+            System.out.println("Talla: " + producto.getTalla());
+            System.out.println("Cantidad en Stock: " + producto.getCantidad());
+            System.out.println("--------------------");
+        }
+
+        // Crear una lista de productos para el pedido
+        List<Producto> productosPedido = new ArrayList<>();
+
+        // Aquí puedes agregar lógica para permitir al vendedor seleccionar productos y agregarlos al pedido
+        while (true) {
+            System.out.println("Agregar Producto al Pedido (Ingrese 0 para finalizar):");
+            System.out.print("Código del producto: ");
+            int codigoProducto = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer
+
+            if (codigoProducto == 0) {
+                break; // El vendedor ha terminado de agregar productos al pedido
+            }
+
+            // Solicitar cantidad del producto
+            System.out.print("Cantidad: ");
+            int cantidad = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer
+
+            // Aquí debes buscar el producto en tu lista de productos por el código
+            // y agregarlo a la lista de productos del pedido
+            Producto productoEncontrado = Producto.buscarProductoPorCodigo(productos, codigoProducto);
+            if (productoEncontrado != null) {
+                // Verificar si hay suficiente cantidad en stock para el pedido
+                if (productoEncontrado.getCantidad() >= cantidad) {
+                    // Agregar el producto con la cantidad especificada al pedido
+                    Producto productoPedido = new Producto(
+                            productoEncontrado.getCodigo(),
+                            productoEncontrado.getNombre(),
+                            productoEncontrado.getColor(),
+                            productoEncontrado.getTalla(),
+                            cantidad
+                    );
+                    productosPedido.add(productoPedido);
+
+                    // Actualizar la cantidad en stock del producto
+                    productoEncontrado.reducirCantidad(cantidad);
+                } else {
+                    System.out.println("No hay suficiente cantidad en stock para el producto seleccionado.");
+                }
+            } else {
+                System.out.println("Producto no encontrado. Verifique el código del producto.");
+            }
+        }
+
+        // Crear un nuevo pedido con el cliente y los productos seleccionados
+        Pedido nuevoPedido = new Pedido(contadorPedido++, nuevoCliente, productosPedido, "Pendiente");
+
+        // Agregar el nuevo pedido a la lista de pedidos
+        pedidos.add(nuevoPedido);
+
+        System.out.println("Cliente y pedido creados exitosamente.");
     }
 
     private void crearPedidoClienteRegistrado(Scanner scanner) {

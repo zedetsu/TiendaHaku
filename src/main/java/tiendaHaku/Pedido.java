@@ -15,6 +15,13 @@ public class Pedido {
         this.estado = "Pendiente";
     }
 
+    public Pedido(int codigoPedido, Cliente cliente, List<Producto> productos, String estado) {
+        this.codigoPedido = codigoPedido;
+        this.cliente = cliente;
+        this.productos = productos;
+        this.estado = estado;
+    }
+
     public int getCodigoPedido() {
         return codigoPedido;
     }
@@ -37,6 +44,16 @@ public class Pedido {
 
     public void marcarComoCompletado() {
         estado = "Completado";
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "codigoPedido=" + codigoPedido +
+                ", cliente=" + cliente +
+                ", productos=" + productos +
+                ", estado='" + estado + '\'' +
+                '}';
     }
 
     // Otros métodos relacionados con el pedido

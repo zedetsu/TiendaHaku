@@ -22,8 +22,8 @@ public class Main {
         Usuario usuario5 = new Usuario("Victor Cruz","Victor C", "vc000");
         usuarios.add(usuario5);
 
-        HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
-        app.menuPrincipal();
+        //HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
+        //app.menuPrincipal();
 
         //productos
         Producto producto1 = new ProductoBuilder()
@@ -70,6 +70,9 @@ public class Main {
         Pedido pedido3 = new Pedido(103, cliente3);
         pedido3.agregarProducto(producto1);
         pedido3.agregarProducto(producto3);
+
+        HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
+        app.menuPrincipal();
 
 
 
