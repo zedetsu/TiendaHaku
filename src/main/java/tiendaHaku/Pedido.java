@@ -1,69 +1,43 @@
 package tiendaHaku;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pedido {
-    private int numeroPedido;
-    private Date fecha;
-    private Producto producto;
-    private int cantidad;
+    private int codigoPedido;
+    private Cliente cliente;
+    private List<Producto> productos;
     private String estado;
 
-    public Pedido(int numeroPedido, Date fecha, Producto producto, int cantidad, String estado) {
-        this.numeroPedido = numeroPedido;
-        this.fecha = fecha;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.estado = estado;
+    public Pedido(int codigoPedido, Cliente cliente) {
+        this.codigoPedido = codigoPedido;
+        this.cliente = cliente;
+        this.productos = new ArrayList<>();
+        this.estado = "Pendiente";
     }
 
-    // Getters y setters para los atributos
-
-    public int getNumeroPedido() {
-        return numeroPedido;
+    public int getCodigoPedido() {
+        return codigoPedido;
     }
 
-    public void setNumeroPedido(int numeroPedido) {
-        this.numeroPedido = numeroPedido;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
     public String getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
     }
 
-    @Override
-    public String toString() {
-        return "Número de Pedido: " + numeroPedido +
-                ", Fecha: " + fecha +
-                ", Producto: " + producto.getNombre() +
-                ", Cantidad: " + cantidad +
-                ", Estado: " + estado;
+    public void marcarComoCompletado() {
+        estado = "Completado";
     }
+
+    // Otros métodos relacionados con el pedido
 }
