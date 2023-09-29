@@ -54,9 +54,9 @@ public class TiendaHaku {
         System.out.print("Ingrese su nombre de usuario: ");
         String nombreUsuario = scanner.nextLine();
         System.out.print("Ingrese su contraseña: ");
-        String contraseña = scanner.nextLine();
+        String contrasenia = scanner.nextLine();
 
-        Usuario cuenta = Usuario.encontrarUsuario(usuarios, nombreUsuario, contraseña);
+        Usuario cuenta = Usuario.encontrarUsuario(usuarios, nombreUsuario, contrasenia);
 
         if (cuenta != null) {
             System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + cuenta.getNombre() + "!");
@@ -73,7 +73,7 @@ public class TiendaHaku {
             try {
                 System.out.println("Panel de Vendedor");
                 System.out.println("1. Registrar un NUEVO producto");
-                System.out.println("2. Ingresar producto");
+                System.out.println("2. Ingresar stock de un producto");
                 System.out.println("3. Gestionar pedidos");
                 System.out.println("4. Generar reportes");
                 System.out.println("0. Salir");
@@ -109,51 +109,44 @@ public class TiendaHaku {
 
     public void registraNuevoProducto(Scanner scanner) {
         System.out.println("Registro de Nuevo Producto");
-
-        // Solicitar al vendedor ingresar los datos del nuevo producto
-        System.out.print("Ingrese el código del producto: ");
-        int codigoProducto = scanner.nextInt();
-        scanner.nextLine(); // Limpia el buffer
-
+        int codigoProducto;
+        boolean codigoExistente;
+        do {
+            codigoExistente = false;
+            System.out.print("Ingrese el código del producto: ");
+            codigoProducto = scanner.nextInt();
+            scanner.nextLine();
+            for (Producto producto : productos) {
+                if (producto.getCodigo() == codigoProducto) {
+                    codigoExistente = true;
+                    System.out.println("El código de producto ya existe. Por favor, ingrese otro código.");
+                    break;
+                }
+            }
+        } while (codigoExistente);
         System.out.print("Ingrese el nombre del producto: ");
         String nombreProducto = scanner.nextLine();
-
         System.out.print("Ingrese el color del producto: ");
         String colorProducto = scanner.nextLine();
-
         System.out.print("Ingrese la talla del producto: ");
         String tallaProducto = scanner.nextLine();
-
         System.out.print("Ingrese la cantidad del producto: ");
         int cantidadProducto = scanner.nextInt();
-
-        // Crear una instancia de Producto con los datos proporcionados
         Producto nuevoProducto = new Producto(codigoProducto, nombreProducto, colorProducto, tallaProducto, cantidadProducto);
-
-        // Agregar el nuevo producto a la lista de productos
         productos.add(nuevoProducto);
-
         System.out.println("Nuevo producto registrado exitosamente.");
     }
 
     public void ingresarProducto(Scanner scanner) {
         System.out.println("Ingreso de Cantidad a Producto Existente");
-
-        // Solicitar al vendedor el código del producto existente
         System.out.print("Ingrese el código del producto existente: ");
         int codigoProducto = scanner.nextInt();
-
-        // Buscar el producto en la lista de productos utilizando el método estático
         Producto productoExistente = Producto.buscarProductoPorCodigo(productos, codigoProducto);
 
         if (productoExistente != null) {
-            // Solicitar al vendedor la cantidad a ingresar
             System.out.print("Ingrese la cantidad a ingresar: ");
             int cantidadAIngresar = scanner.nextInt();
-
-            // Utilizar el método de la clase Producto para aumentar la cantidad del producto existente
             productoExistente.aumentarCantidad(cantidadAIngresar);
-
             System.out.println("Cantidad del producto actualizada exitosamente.");
         } else {
             System.out.println("Producto no encontrado. Verifique el código del producto.");
@@ -170,10 +163,8 @@ public class TiendaHaku {
                 System.out.println("3. Actualizar Estado de un Pedido");
                 System.out.println("4. Salir");
                 System.out.print("Seleccione una opción: ");
-
                 int opcionGestionPedidos = scanner.nextInt();
                 scanner.nextLine(); // Limpiar el buffer
-
                 switch (opcionGestionPedidos) {
                     case 1:
                         crearNuevoPedido(scanner);
