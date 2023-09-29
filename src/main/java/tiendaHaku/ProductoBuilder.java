@@ -28,7 +28,7 @@ public class ProductoBuilder {
     }
 
     public ProductoBuilder setCantidad(int cantidad) {
-        this.codigo = cantidad;
+        this.cantidad = cantidad;
         return  this;
     }
 
