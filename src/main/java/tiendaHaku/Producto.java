@@ -1,6 +1,5 @@
 package tiendaHaku;
 import java.util.List;
-import java.util.Objects;
 
 public class Producto {
     private int codigo;
@@ -87,16 +86,5 @@ public class Producto {
                 ", Nombre: " + nombre +
                 ", Color: " + color +
                 ", Talla: " + talla;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Producto producto = (Producto) obj;
-        return codigo == producto.codigo &&
-                Objects.equals(nombre, producto.nombre) &&
-                Objects.equals(color, producto.color) &&
-                Objects.equals(talla, producto.talla);
     }
 }
