@@ -38,12 +38,25 @@ public class Pedido {
         return estado;
     }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public void agregarProducto(Producto producto) {
         productos.add(producto);
     }
 
     public void marcarComoCompletado() {
         estado = "Completado";
+    }
+
+    public static Pedido buscarPedidoPorCodigo(List<Pedido> pedidos, int codigoPedido) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCodigoPedido() == codigoPedido) {
+                return pedido; // Se encontró el pedido con el código especificado
+            }
+        }
+        return null; // No se encontró ningún pedido con el código especificado
     }
 
     @Override

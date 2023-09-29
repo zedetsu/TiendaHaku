@@ -382,15 +382,94 @@ public class HakuApp {
     }
 
     private void verListaDeClientesRegistrados() {
-        // Lógica para mostrar la lista de clientes registrados
+        System.out.println("Lista de Clientes Registrados:");
+
+        for (Cliente cliente : clientes) {
+            System.out.println("Código de Cliente: " + cliente.getCodigoCliente());
+            System.out.println("Nombre: " + cliente.getNombre());
+            System.out.println("Dirección: " + cliente.getDireccion());
+            System.out.println("--------------------");
+        }
     }
 
     private void verListaDePedidos() {
-        // Lógica para mostrar la lista de pedidos
+        System.out.println("Lista de Pedidos:");
+
+        for (Pedido pedido : pedidos) {
+            System.out.println("Código de Pedido: " + pedido.getCodigoPedido());
+            System.out.println("Código de Cliente: " + pedido.getCliente().getCodigoCliente());
+            System.out.println("Estado: " + pedido.getEstado());
+
+            System.out.println("Productos en el Pedido:");
+            List<Producto> productosPedido = pedido.getProductos();
+            for (Producto producto : productosPedido) {
+                System.out.println("Código de Producto: " + producto.getCodigo());
+                System.out.println("Nombre: " + producto.getNombre());
+                System.out.println("Color: " + producto.getColor());
+                System.out.println("Talla: " + producto.getTalla());
+                System.out.println("Cantidad: " + producto.getCantidad());
+            }
+
+            System.out.println("--------------------");
+        }
     }
 
     private void actualizarEstadoDePedido(Scanner scanner) {
-        // Lógica para actualizar el estado de un pedido
+        System.out.println("Actualización de Estado de Pedido");
+
+        // Solicitar al vendedor el código del pedido a actualizar
+        System.out.print("Ingrese el código del pedido a actualizar: ");
+        int codigoPedido = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
+
+        // Buscar el pedido en la lista de pedidos
+        Pedido pedidoExistente = Pedido.buscarPedidoPorCodigo(pedidos, codigoPedido);
+
+        if (pedidoExistente != null) {
+            // Mostrar el estado actual del pedido
+            System.out.println("Estado Actual del Pedido: " + pedidoExistente.getEstado());
+
+            // Verificar si hay stock suficiente para completar el pedido
+            boolean stockSuficiente = verificarStockPedido(pedidoExistente);
+
+            if (stockSuficiente) {
+                // Solicitar al vendedor el nuevo estado del pedido
+                System.out.print("Ingrese el nuevo estado del pedido (Por ejemplo, 'Completado' o 'Pendiente'): ");
+                String nuevoEstado = scanner.nextLine();
+
+                // Actualizar el estado del pedido
+                pedidoExistente.setEstado(nuevoEstado);
+
+                System.out.println("Estado del pedido actualizado exitosamente.");
+            } else {
+                // Mostrar los productos que no tienen stock suficiente
+                System.out.println("No se puede completar el pedido debido a la falta de stock en los siguientes productos:");
+                mostrarProductosSinStock(pedidoExistente);
+            }
+        } else {
+            System.out.println("Pedido no encontrado. Verifique el código del pedido.");
+        }
+    }
+
+    // Método para verificar si hay stock suficiente para completar el pedido
+    private boolean verificarStockPedido(Pedido pedido) {
+        List<Producto> productosPedido = pedido.getProductos();
+        for (Producto producto : productosPedido) {
+            if (producto.getCantidad() < 1) {
+                return false; // No hay stock suficiente para al menos un producto
+            }
+        }
+        return true; // Hay stock suficiente para todos los productos
+    }
+
+    // Método para mostrar los productos que no tienen stock suficiente
+    private void mostrarProductosSinStock(Pedido pedido) {
+        List<Producto> productosPedido = pedido.getProductos();
+        for (Producto producto : productosPedido) {
+            if (producto.getCantidad() < 1) {
+                System.out.println("Producto: " + producto.getNombre() + " (Código: " + producto.getCodigo() + ") - Cantidad en Stock: " + producto.getCantidad());
+            }
+        }
     }
 
     public void generarReportes() {
