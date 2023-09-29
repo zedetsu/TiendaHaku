@@ -7,7 +7,7 @@ public class HakuApp {
     private List<Usuario> usuarios;
     private List<Producto> productos;
     private List<Pedido> pedidos;
-    private int contadorPedido = 1;
+    private int contadorPedido = 1;//a
 
     public HakuApp() {
         usuarios = new ArrayList<>();
