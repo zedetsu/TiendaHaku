@@ -1,4 +1,5 @@
 package tiendaHaku;
+import java.util.List;
 import java.util.Objects;
 
 public class Producto {
@@ -63,17 +64,21 @@ public class Producto {
         }
     }
 
+    public static Producto buscarProductoPorCodigo(List<Producto> productos, int codigo) {
+        for (Producto producto : productos) {
+            if (producto.getCodigo() == codigo) {
+                return producto;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "ID: " + codigo +
                 ", Nombre: " + nombre +
                 ", Color: " + color +
                 ", Talla: " + talla;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(codigo, nombre, color, talla);
     }
 
     @Override

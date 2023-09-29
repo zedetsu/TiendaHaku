@@ -138,15 +138,15 @@ public class HakuApp {
         System.out.print("Ingrese el código del producto existente: ");
         int codigoProducto = scanner.nextInt();
 
-        // Buscar el producto en la lista de productos
-        Producto productoExistente = buscarProductoPorCodigo(codigoProducto);
+        // Buscar el producto en la lista de productos utilizando el método estático
+        Producto productoExistente = Producto.buscarProductoPorCodigo(productos, codigoProducto);
 
         if (productoExistente != null) {
             // Solicitar al vendedor la cantidad a ingresar
             System.out.print("Ingrese la cantidad a ingresar: ");
             int cantidadAIngresar = scanner.nextInt();
 
-            // Aumentar la cantidad del producto existente
+            // Utilizar el método de la clase Producto para aumentar la cantidad del producto existente
             productoExistente.aumentarCantidad(cantidadAIngresar);
 
             System.out.println("Cantidad del producto actualizada exitosamente.");
@@ -155,18 +155,85 @@ public class HakuApp {
         }
     }
 
-    // Método para buscar un producto por código
-    private Producto buscarProductoPorCodigo(int codigoProducto) {
-        for (Producto producto : productos) {
-            if (producto.getCodigo() == codigoProducto) {
-                return producto;
-            }
-        }
-        return null; // Producto no encontrado
-    }
 
     public void gestionarPedidos(Scanner scanner) {
-        // Implementa la lógica para gestionar pedidos aquí
+        while (true) {
+            System.out.println("Gestión de Pedidos");
+            System.out.println("1. Crear Nuevo Pedido");
+            System.out.println("2. Ver Lista de Pedidos");
+            System.out.println("3. Actualizar Estado de un Pedido");
+            System.out.println("4. Salir");
+            System.out.print("Seleccione una opción: ");
+
+            int opcionGestionPedidos = scanner.nextInt();
+            scanner.nextLine(); // Limpiar el buffer
+
+            switch (opcionGestionPedidos) {
+                case 1:
+                    crearNuevoPedido(scanner);
+                    break;
+                case 2:
+                    verListaDePedidos();
+                    break;
+                case 3:
+                    actualizarEstadoDePedido(scanner);
+                    break;
+                case 4:
+                    System.out.println("Saliendo de la gestión de pedidos...");
+                    return;
+                default:
+                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+            }
+        }
+    }
+
+    private void crearNuevoPedido(Scanner scanner) {
+        System.out.println("Crear Nuevo Pedido");
+        System.out.println("1. Pedido Cliente Nuevo");
+        System.out.println("2. Pedido Cliente Registrado");
+        System.out.println("3. Ver Lista de Clientes Registrados");
+        System.out.println("4. Salir");
+        System.out.print("Seleccione una opción: ");
+
+        int opcionCrearPedido = scanner.nextInt();
+        scanner.nextLine(); // Limpiar el buffer
+
+        switch (opcionCrearPedido) {
+            case 1:
+                crearPedidoClienteNuevo(scanner);
+                break;
+            case 2:
+                crearPedidoClienteRegistrado(scanner);
+                break;
+            case 3:
+                verListaDeClientesRegistrados();
+                break;
+            case 4:
+                System.out.println("Volviendo al menú de gestión de pedidos...");
+                break;
+            default:
+                System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+        }
+    }
+
+    private void crearPedidoClienteNuevo(Scanner scanner) {
+        // Lógica para crear un pedido con un cliente nuevo
+    }
+
+    private void crearPedidoClienteRegistrado(Scanner scanner) {
+        // Lógica para crear un pedido con un cliente registrado
+    }
+
+    private void verListaDeClientesRegistrados() {
+        // Lógica para mostrar la lista de clientes registrados
+    }
+
+    private void verListaDePedidos() {
+        // Lógica para mostrar la lista de pedidos
+    }
+
+    private void actualizarEstadoDePedido(Scanner scanner) {
+        // Lógica para actualizar el estado de un pedido
     }
 
     public void generarReportes() {
