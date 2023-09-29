@@ -1,4 +1,7 @@
 package tiendaHaku;
+
+import java.util.List;
+
 public class Usuario {
     private String nombre;
     private String nombreUsuario;
@@ -32,6 +35,15 @@ public class Usuario {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public static Usuario encontrarUsuario(List<Usuario> usuarios, String nombreUsuario, String contraseña) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)) {
+                return usuario;
+            }
+        }
+        return null;
     }
 
 }

@@ -20,7 +20,7 @@ public class Main {
         usuarios.add(usuario3);
         Usuario usuario4 = new Usuario("Yoel Briseno","YoelB", "yb000");
         usuarios.add(usuario4);
-        Usuario usuario5 = new Usuario("Victor Cruz","Victor C", "vc000");
+        Usuario usuario5 = new Usuario("Victor Cruz","VictorC", "vc000");
         usuarios.add(usuario5);
 
 

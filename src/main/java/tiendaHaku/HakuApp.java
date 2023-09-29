@@ -48,7 +48,7 @@ public class HakuApp {
         System.out.print("Ingrese su contraseña: ");
         String contraseña = scanner.nextLine();
 
-        Usuario cuenta = encontrarUsuario(nombreUsuario, contraseña);
+        Usuario cuenta = Usuario.encontrarUsuario(usuarios, nombreUsuario, contraseña);
 
         if (cuenta != null) {
             System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + cuenta.getNombre() + "!");
@@ -58,15 +58,6 @@ public class HakuApp {
         } else {
             System.out.println("Credenciales incorrectas. Por favor, inténtelo de nuevo.");
         }
-    }
-
-    public Usuario encontrarUsuario(String nombreUsuario, String contraseña) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)) {
-                return usuario;
-            }
-        }
-        return null;
     }
 
     public void menuVendedor(Scanner scanner, Usuario usuario) {
