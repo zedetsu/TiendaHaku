@@ -70,35 +70,39 @@ public class TiendaHaku {
 
     public void menuVendedor(Scanner scanner) {
         while (true) {
-            System.out.println("Panel de Vendedor");
-            System.out.println("1. Registrar un NUEVO producto");
-            System.out.println("2. Ingresar producto");
-            System.out.println("3. Gestionar pedidos");
-            System.out.println("4. Generar reportes");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
+            try {
+                System.out.println("Panel de Vendedor");
+                System.out.println("1. Registrar un NUEVO producto");
+                System.out.println("2. Ingresar producto");
+                System.out.println("3. Gestionar pedidos");
+                System.out.println("4. Generar reportes");
+                System.out.println("0. Salir");
+                System.out.print("Seleccione una opción: ");
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
+                int opcion = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    registraNuevoProducto(scanner);
-                    break;
-                case 2:
-                    ingresarProducto(scanner);
-                    break;
-                case 3:
-                    gestionarPedidos(scanner);
-                    break;
-                case 4:
-                    generarReportes(scanner);
-                    break;
-                case 0:
-                    System.out.println("Cerrando sesión de vendedor...");
-                    return;
-                default:
-                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                switch (opcion) {
+                    case 1:
+                        registraNuevoProducto(scanner);
+                        break;
+                    case 2:
+                        ingresarProducto(scanner);
+                        break;
+                    case 3:
+                        gestionarPedidos(scanner);
+                        break;
+                    case 4:
+                        generarReportes(scanner);
+                        break;
+                    case 0:
+                        System.out.println("Cerrando sesión de vendedor...");
+                        return;
+                    default:
+                        System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                }
+            } catch (InputMismatchException e) {
+                InputErrorHandler.handleInputMismatch(scanner);
             }
         }
     }
@@ -159,61 +163,71 @@ public class TiendaHaku {
 
     public void gestionarPedidos(Scanner scanner) {
         while (true) {
-            System.out.println("Gestión de Pedidos");
-            System.out.println("1. Crear Nuevo Pedido");
-            System.out.println("2. Ver Lista de Pedidos");
-            System.out.println("3. Actualizar Estado de un Pedido");
-            System.out.println("4. Salir");
-            System.out.print("Seleccione una opción: ");
+            try {
+                System.out.println("Gestión de Pedidos");
+                System.out.println("1. Crear Nuevo Pedido");
+                System.out.println("2. Ver Lista de Pedidos");
+                System.out.println("3. Actualizar Estado de un Pedido");
+                System.out.println("4. Salir");
+                System.out.print("Seleccione una opción: ");
 
-            int opcionGestionPedidos = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+                int opcionGestionPedidos = scanner.nextInt();
+                scanner.nextLine(); // Limpiar el buffer
 
-            switch (opcionGestionPedidos) {
-                case 1:
-                    crearNuevoPedido(scanner);
-                    break;
-                case 2:
-                    verListaDePedidos();
-                    break;
-                case 3:
-                    actualizarEstadoDePedido(scanner);
-                    break;
-                case 4:
-                    System.out.println("Saliendo de la gestión de pedidos...");
-                    return;
-                default:
-                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                switch (opcionGestionPedidos) {
+                    case 1:
+                        crearNuevoPedido(scanner);
+                        break;
+                    case 2:
+                        verListaDePedidos();
+                        break;
+                    case 3:
+                        actualizarEstadoDePedido(scanner);
+                        break;
+                    case 4:
+                        System.out.println("Saliendo de la gestión de pedidos...");
+                        return;
+                    default:
+                        System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                }
+            } catch (InputMismatchException e) {
+                InputErrorHandler.handleInputMismatch(scanner);
             }
         }
     }
 
     private void crearNuevoPedido(Scanner scanner) {
-        System.out.println("Crear Nuevo Pedido");
-        System.out.println("1. Pedido Cliente Nuevo");
-        System.out.println("2. Pedido Cliente Registrado");
-        System.out.println("3. Ver Lista de Clientes Registrados");
-        System.out.println("4. Salir");
-        System.out.print("Seleccione una opción: ");
+        while (true) {
+            try {
+                System.out.println("Crear Nuevo Pedido");
+                System.out.println("1. Pedido Cliente Nuevo");
+                System.out.println("2. Pedido Cliente Registrado");
+                System.out.println("3. Ver Lista de Clientes Registrados");
+                System.out.println("4. Salir");
+                System.out.print("Seleccione una opción: ");
 
-        int opcionCrearPedido = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+                int opcionCrearPedido = scanner.nextInt();
+                scanner.nextLine(); // Limpiar el buffer
 
-        switch (opcionCrearPedido) {
-            case 1:
-                crearPedidoClienteNuevo(scanner);
-                break;
-            case 2:
-                crearPedidoClienteRegistrado(scanner);
-                break;
-            case 3:
-                verListaDeClientesRegistrados();
-                break;
-            case 4:
-                System.out.println("Volviendo al menú de gestión de pedidos...");
-                break;
-            default:
-                System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                switch (opcionCrearPedido) {
+                    case 1:
+                        crearPedidoClienteNuevo(scanner);
+                        break;
+                    case 2:
+                        crearPedidoClienteRegistrado(scanner);
+                        break;
+                    case 3:
+                        verListaDeClientesRegistrados();
+                        break;
+                    case 4:
+                        System.out.println("Volviendo al menú de gestión de pedidos...");
+                        return;
+                    default:
+                        System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                }
+            } catch (InputMismatchException e) {
+                InputErrorHandler.handleInputMismatch(scanner);
+            }
         }
     }
 
