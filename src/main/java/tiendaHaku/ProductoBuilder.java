@@ -5,6 +5,7 @@ public class ProductoBuilder {
     private String nombre;
     private String color;
     private String talla;
+    private int cantidad;
 
     public ProductoBuilder setCodigo(int codigo) {
         this.codigo = codigo;
@@ -26,7 +27,12 @@ public class ProductoBuilder {
         return this;
     }
 
+    public ProductoBuilder setCantidad(int cantidad) {
+        this.codigo = cantidad;
+        return  this;
+    }
+
     public Producto build() {
-        return new Producto(codigo,nombre,color,talla);
+        return new Producto(codigo,nombre,color,talla,cantidad);
     }
 }

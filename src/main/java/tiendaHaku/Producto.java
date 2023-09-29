@@ -6,12 +6,14 @@ public class Producto {
     private String nombre;
     private String color;
     private String talla;
+    private int cantidad;
 
-    public Producto(int id, String nombre, String color, String talla) {
+    public Producto(int id, String nombre, String color, String talla, int cantidad) {
         this.codigo = id;
         this.nombre = nombre;
         this.color = color;
         this.talla = talla;
+        this.cantidad = cantidad;
     }
 
     public int getCodigo() {
@@ -28,6 +30,37 @@ public class Producto {
 
     public String getTalla() {
         return talla;
+    }
+
+    public int getCantidad() { return cantidad; }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void aumentarCantidad(int cantidadAIngresar) {
+        if (cantidadAIngresar > 0) {
+            this.cantidad += cantidadAIngresar;
+            System.out.println("Cantidad aumentada a " + this.cantidad);
+        } else {
+            System.out.println("La cantidad a ingresar debe ser mayor que cero.");
+        }
     }
 
     @Override

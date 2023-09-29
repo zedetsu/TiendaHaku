@@ -1,27 +1,22 @@
 package tiendaHaku;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class HakuApp {
-    private Map<String, CuentaUsuario> cuentas;
+    private List<Usuario> usuarios;
     private List<Producto> productos;
     private List<Pedido> pedidos;
     private int contadorPedido = 1;
 
     public HakuApp() {
-        cuentas = new HashMap<>();
+        usuarios = new ArrayList<>();
         productos = new ArrayList<>();
         pedidos = new ArrayList<>();
-        empleados = new ArrayList<>();
 
-        // Se agrega un empleado de ejemplo con cuenta de usuario
-        Empleado empleadoEjemplo = new Empleado(15472,"Juan Pérez", "Pérez", "Vendedor");
-        CuentaUsuario cuentaEjemplo = new CuentaUsuario(empleadoEjemplo.getId(), "empleado");
-        cuentas.put("empleado", cuentaEjemplo);
+        // Se agrega un usuario de ejemplo con cuenta de usuario
+        Usuario usuario1 = new Usuario("Juan Pérez","Juan", "contrasenia");
+        usuarios.add(usuario1);
     }
 
     public static void main(String[] args) {
@@ -60,23 +55,32 @@ public class HakuApp {
         System.out.print("Ingrese su contraseña: ");
         String contraseña = scanner.nextLine();
 
-        CuentaUsuario cuenta = cuentas.get(nombreUsuario);
+        Usuario cuenta = encontrarUsuario(nombreUsuario, contraseña);
 
-        if (cuenta != null && cuenta.getContraseña().equals(contraseña)) {
-            System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + cuenta.getNombreUsuario() + "!");
-            Empleado empleado = empleado.getNombre()
+        if (cuenta != null) {
+            System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + cuenta.getNombre() + "!");
 
             // Redirigir al usuario al menú correspondiente
-            menuEmpleado(scanner, e.getNombre(cuenta.getNombreUsuario()cuenta.getNombreUsuario());
+            menuVendedor(scanner, cuenta);
         } else {
             System.out.println("Credenciales incorrectas. Por favor, inténtelo de nuevo.");
         }
     }
 
-    public void menuEmpleado(Scanner scanner, Empleado empleado) {
+    public Usuario encontrarUsuario(String nombreUsuario, String contraseña) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)) {
+                return usuario;
+            }
+        }
+        return null; // Si no se encuentra una coincidencia
+    }
+
+    public void menuVendedor(Scanner scanner, Usuario usuario) {
         while (true) {
-            System.out.println("Panel de Empleado");
-            System.out.println("1. Registrar producto");
+            System.out.println("Panel de Vendedor");
+            System.out.println("1. Registrar un NUEVO producto");
+            System.out.println("2. Ingresar producto");
             System.out.println("2. Gestionar pedidos");
             System.out.println("3. Generar reportes");
             System.out.println("0. Salir");
@@ -87,16 +91,19 @@ public class HakuApp {
 
             switch (opcion) {
                 case 1:
-                    registrarProducto(scanner);
+                    registraNuevoProducto(scanner);
                     break;
                 case 2:
-                    gestionarPedidos(scanner);
+                    ingresarProducto(scanner);
                     break;
                 case 3:
+                    gestionarPedidos(scanner);
+                    break;
+                case 4:
                     generarReportes();
                     break;
                 case 0:
-                    System.out.println("Cerrando sesión de empleado...");
+                    System.out.println("Cerrando sesión de vendedor...");
                     return;
                 default:
                     System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
@@ -104,8 +111,67 @@ public class HakuApp {
         }
     }
 
-    public void registrarProducto(Scanner scanner) {
-        // Implementa la lógica para registrar un producto aquí
+    public void registraNuevoProducto(Scanner scanner) {
+        System.out.println("Registro de Nuevo Producto");
+
+        // Solicitar al vendedor ingresar los datos del nuevo producto
+        System.out.print("Ingrese el código del producto: ");
+        int codigoProducto = scanner.nextInt();
+        scanner.nextLine(); // Limpia el buffer
+
+        System.out.print("Ingrese el nombre del producto: ");
+        String nombreProducto = scanner.nextLine();
+
+        System.out.print("Ingrese el color del producto: ");
+        String colorProducto = scanner.nextLine();
+
+        System.out.print("Ingrese la talla del producto: ");
+        String tallaProducto = scanner.nextLine();
+
+        System.out.print("Ingrese la cantidad del producto: ");
+        int cantidadProducto = scanner.nextInt();
+
+        // Crear una instancia de Producto con los datos proporcionados
+        Producto nuevoProducto = new Producto(codigoProducto, nombreProducto, colorProducto, tallaProducto, cantidadProducto);
+
+        // Agregar el nuevo producto a la lista de productos
+        productos.add(nuevoProducto);
+
+        System.out.println("Nuevo producto registrado exitosamente.");
+    }
+
+    public void ingresarProducto(Scanner scanner) {
+        System.out.println("Ingreso de Cantidad a Producto Existente");
+
+        // Solicitar al vendedor el código del producto existente
+        System.out.print("Ingrese el código del producto existente: ");
+        int codigoProducto = scanner.nextInt();
+
+        // Buscar el producto en la lista de productos
+        Producto productoExistente = buscarProductoPorCodigo(codigoProducto);
+
+        if (productoExistente != null) {
+            // Solicitar al vendedor la cantidad a ingresar
+            System.out.print("Ingrese la cantidad a ingresar: ");
+            int cantidadAIngresar = scanner.nextInt();
+
+            // Aumentar la cantidad del producto existente
+            productoExistente.aumentarCantidad(cantidadAIngresar);
+
+            System.out.println("Cantidad del producto actualizada exitosamente.");
+        } else {
+            System.out.println("Producto no encontrado. Verifique el código del producto.");
+        }
+    }
+
+    // Método para buscar un producto por código
+    private Producto buscarProductoPorCodigo(int codigoProducto) {
+        for (Producto producto : productos) {
+            if (producto.getCodigo() == codigoProducto) {
+                return producto;
+            }
+        }
+        return null; // Producto no encontrado
     }
 
     public void gestionarPedidos(Scanner scanner) {
@@ -118,4 +184,3 @@ public class HakuApp {
 
     // Resto de métodos de la clase HakuApp...
 }
-
