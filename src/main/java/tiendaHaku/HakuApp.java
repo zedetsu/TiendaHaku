@@ -223,7 +223,7 @@ public class HakuApp {
 
         // Solicitar información del cliente nuevo
         System.out.print("Código del cliente: ");
-        String codigoCliente = scanner.nextLine();
+        int codigoCliente = scanner.nextInt();
 
         System.out.print("Nombre del cliente: ");
         String nombreCliente = scanner.nextLine();

@@ -51,9 +51,9 @@ public class Main {
                 .build();
 
         //clientes
-        Cliente cliente1 = new Cliente("C001", "Juan Pérez", "Calle 123");
-        Cliente cliente2 = new Cliente("C002", "María López", "Avenida 456");
-        Cliente cliente3 = new Cliente("C003", "Carlos Rodríguez", "Carrera 789");
+        Cliente cliente1 = new Cliente(1, "Juan Pérez", "Calle 123");
+        Cliente cliente2 = new Cliente(2, "María López", "Avenida 456");
+        Cliente cliente3 = new Cliente(3, "Carlos Rodríguez", "Carrera 789");
 
         clientes.add(cliente1);
         clientes.add(cliente2);
