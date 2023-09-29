@@ -58,7 +58,25 @@ public class Pedido {
         }
         return null; // No se encontró ningún pedido con el código especificado
     }
-
+    // Método para verificar si hay stock suficiente para completar el pedido
+    public boolean verificarStockPedido() {
+        List<Producto> productosPedido = this.productos;
+        for (Producto producto : productosPedido) {
+            if (producto.getCantidad() < 1) {
+                return false; // No hay stock suficiente para al menos un producto
+            }
+        }
+        return true; // Hay stock suficiente para todos los productos
+    }
+    // Método para mostrar los productos que no tienen stock suficiente
+    public void mostrarProductosSinStock() {
+        List<Producto> productosPedido = this.productos;
+        for (Producto producto : productosPedido) {
+            if (producto.getCantidad() < 1) {
+                System.out.println("Producto: " + producto.getNombre() + " (Código: " + producto.getCodigo() + ") - Cantidad en Stock: " + producto.getCantidad());
+            }
+        }
+    }
     @Override
     public String toString() {
         return "Pedido{" +

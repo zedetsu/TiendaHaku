@@ -54,13 +54,13 @@ public class HakuApp {
             System.out.println("Inicio de sesión exitoso. ¡Bienvenido, " + cuenta.getNombre() + "!");
 
             // Redirigir al usuario al menú correspondiente
-            menuVendedor(scanner, cuenta);
+            menuVendedor(scanner);
         } else {
             System.out.println("Credenciales incorrectas. Por favor, inténtelo de nuevo.");
         }
     }
 
-    public void menuVendedor(Scanner scanner, Usuario usuario) {
+    public void menuVendedor(Scanner scanner) {
         while (true) {
             System.out.println("Panel de Vendedor");
             System.out.println("1. Registrar un NUEVO producto");
@@ -421,7 +421,7 @@ public class HakuApp {
             System.out.println("Estado Actual del Pedido: " + pedidoExistente.getEstado());
 
             // Verificar si hay stock suficiente para completar el pedido
-            boolean stockSuficiente = verificarStockPedido(pedidoExistente);
+            boolean stockSuficiente = pedidoExistente.verificarStockPedido();
 
             if (stockSuficiente) {
                 // Solicitar al vendedor el nuevo estado del pedido
@@ -435,31 +435,10 @@ public class HakuApp {
             } else {
                 // Mostrar los productos que no tienen stock suficiente
                 System.out.println("No se puede completar el pedido debido a la falta de stock en los siguientes productos:");
-                mostrarProductosSinStock(pedidoExistente);
+                pedidoExistente.mostrarProductosSinStock();
             }
         } else {
             System.out.println("Pedido no encontrado. Verifique el código del pedido.");
-        }
-    }
-
-    // Método para verificar si hay stock suficiente para completar el pedido
-    private boolean verificarStockPedido(Pedido pedido) {
-        List<Producto> productosPedido = pedido.getProductos();
-        for (Producto producto : productosPedido) {
-            if (producto.getCantidad() < 1) {
-                return false; // No hay stock suficiente para al menos un producto
-            }
-        }
-        return true; // Hay stock suficiente para todos los productos
-    }
-
-    // Método para mostrar los productos que no tienen stock suficiente
-    private void mostrarProductosSinStock(Pedido pedido) {
-        List<Producto> productosPedido = pedido.getProductos();
-        for (Producto producto : productosPedido) {
-            if (producto.getCantidad() < 1) {
-                System.out.println("Producto: " + producto.getNombre() + " (Código: " + producto.getCodigo() + ") - Cantidad en Stock: " + producto.getCantidad());
-            }
         }
     }
 
