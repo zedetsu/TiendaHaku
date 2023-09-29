@@ -2,6 +2,7 @@ package tiendaHaku;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,8 +23,6 @@ public class Main {
         Usuario usuario5 = new Usuario("Victor Cruz","Victor C", "vc000");
         usuarios.add(usuario5);
 
-        //HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
-        //app.menuPrincipal();
 
         //productos
         Producto producto1 = new ProductoBuilder()
@@ -54,6 +53,9 @@ public class Main {
         productos.add(producto2);
         productos.add(producto3);
 
+        productos.add(producto1);
+        productos.add(producto2);
+        productos.add(producto3);
         //clientes
         Cliente cliente1 = new Cliente(1, "Juan Pérez", "Calle 123");
         Cliente cliente2 = new Cliente(2, "María López", "Avenida 456");
@@ -74,6 +76,11 @@ public class Main {
         Pedido pedido3 = new Pedido(103, cliente3);
         pedido3.agregarProducto(producto1);
         pedido3.agregarProducto(producto3);
+
+        pedidos.add(pedido1);
+        pedidos.add(pedido2);
+        pedidos.add(pedido3);
+
 
         HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
         app.menuPrincipal();

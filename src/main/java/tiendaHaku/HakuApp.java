@@ -93,7 +93,7 @@ public class HakuApp {
                     gestionarPedidos(scanner);
                     break;
                 case 4:
-                    generarReportes();
+                    generarReportes(scanner);
                     break;
                 case 0:
                     System.out.println("Cerrando sesión de vendedor...");
@@ -472,64 +472,43 @@ public class HakuApp {
         }
     }
 
-    private void generarReportes() {
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("Generación de Reportes");
-            System.out.println("1. Ver Lista de Clientes");
-            System.out.println("2. Ver Lista de Productos");
-            System.out.println("3. Ver Lista de Pedidos");
-            System.out.println("4. Salir");
-            System.out.print("Seleccione una opción: ");
-
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
-
-            switch (opcion) {
-                case 1:
-                    // Opción para ver la lista de clientes
-                    verListaDeClientes();
-                    break;
-                case 2:
-                    // Opción para ver la lista de productos
-                    verListaDeProductos();
-                    break;
-                case 3:
-                    // Opción para ver la lista de pedidos
-                    verListaDePedidos();
-                    break;
-                case 4:
-                    // Opción para salir del menú de reportes
-                    return;
-                default:
-                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
-            }
-        }
-    }
-
-    // Método para ver la lista de clientes
-    private void verListaDeClientes() {
-        System.out.println("Lista de Clientes:");
+    public void generarReportes(Scanner scanner) {
+        System.out.println("---- Reporte de Clientes ----");
         for (Cliente cliente : clientes) {
             System.out.println("Código de Cliente: " + cliente.getCodigoCliente());
             System.out.println("Nombre: " + cliente.getNombre());
             System.out.println("Dirección: " + cliente.getDireccion());
-            System.out.println();
+            System.out.println("------------------------------");
         }
-    }
 
-    // Método para ver la lista de productos
-    private void verListaDeProductos() {
-        System.out.println("Lista de Productos:");
+        System.out.println("---- Reporte de Pedidos ----");
+        for (Pedido pedido : pedidos) {
+            System.out.println("Número de Pedido: " + pedido.getCodigoPedido());
+            System.out.println("Estado: " + pedido.getEstado());
+            System.out.println("Productos:");
+
+
+            for (Producto producto : pedido.getProductos()) {
+                System.out.println("   - " + producto.getNombre());
+            }
+
+            System.out.println("------------------------------");
+        }
+
+        System.out.println("---- Reporte de Productos ----");
         for (Producto producto : productos) {
             System.out.println("Código de Producto: " + producto.getCodigo());
             System.out.println("Nombre: " + producto.getNombre());
             System.out.println("Color: " + producto.getColor());
             System.out.println("Talla: " + producto.getTalla());
-            System.out.println("Cantidad en Stock: " + producto.getCantidad());
-            System.out.println();
+            System.out.println("Cantidad Disponible: " + producto.getCantidad());
+            System.out.println("------------------------------");
         }
+
+        // Esperar una entrada del usuario antes de continuar
+        System.out.print("Presione Enter para volver al menú...");
+        scanner.nextLine();
     }
+
     // Resto de métodos de la clase HakuApp...
 }
