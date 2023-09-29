@@ -2,7 +2,6 @@ package tiendaHaku;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -82,7 +81,7 @@ public class Main {
         pedidos.add(pedido3);
 
 
-        HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
+        TiendaHaku app = new TiendaHaku(usuarios,clientes,productos,pedidos);
         app.menuPrincipal();
 
     }

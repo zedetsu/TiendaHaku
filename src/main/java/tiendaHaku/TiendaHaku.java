@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class HakuApp {
+public class TiendaHaku {
     private List<Usuario> usuarios;
     private List<Cliente> clientes;
     private List<Producto> productos;
     private List<Pedido> pedidos;
     private int contadorPedido = 0;
 
-    public HakuApp(List<Usuario> usuarios, List<Cliente> clientes, List<Producto> productos, List<Pedido> pedidos) {
+    public TiendaHaku(List<Usuario> usuarios, List<Cliente> clientes, List<Producto> productos, List<Pedido> pedidos) {
         this.usuarios = usuarios;
         this.clientes = clientes;
         this.productos = productos;
