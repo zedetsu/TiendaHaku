@@ -14,9 +14,15 @@ public class HakuApp {
         productos = new ArrayList<>();
         pedidos = new ArrayList<>();
 
-        // Se agrega un usuario de ejemplo con cuenta de usuario
-        Usuario usuario1 = new Usuario("Juan Pérez","Juan", "contrasenia");
+        //Se agregan los Usuarios
+        Usuario usuario1 = new Usuario("Oscar Paredes","OscarP", "contrasenia");
         usuarios.add(usuario1);
+        Usuario usuario2 = new Usuario("Gabriel","Gabriel", "contrasenia");
+        usuarios.add(usuario2);
+        Usuario usuario3 = new Usuario("Cristian","Cristian", "contrasenia");
+        usuarios.add(usuario3);
+        Usuario usuario4 = new Usuario("Oscar Paredes","OscarP", "contrasenia");
+        usuarios.add(usuario4);
     }
 
     public static void main(String[] args) {
@@ -34,7 +40,7 @@ public class HakuApp {
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
@@ -81,8 +87,8 @@ public class HakuApp {
             System.out.println("Panel de Vendedor");
             System.out.println("1. Registrar un NUEVO producto");
             System.out.println("2. Ingresar producto");
-            System.out.println("2. Gestionar pedidos");
-            System.out.println("3. Generar reportes");
+            System.out.println("3. Gestionar pedidos");
+            System.out.println("4. Generar reportes");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
 
