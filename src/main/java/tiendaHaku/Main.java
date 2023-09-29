@@ -50,6 +50,10 @@ public class Main {
                 .setCantidad(8)
                 .build();
 
+        productos.add(producto1);
+        productos.add(producto2);
+        productos.add(producto3);
+
         //clientes
         Cliente cliente1 = new Cliente(1, "Juan Pérez", "Calle 123");
         Cliente cliente2 = new Cliente(2, "María López", "Avenida 456");
@@ -73,8 +77,6 @@ public class Main {
 
         HakuApp app = new HakuApp(usuarios,clientes,productos,pedidos);
         app.menuPrincipal();
-
-
 
     }
 }
